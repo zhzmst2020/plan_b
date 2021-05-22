@@ -581,8 +581,8 @@ del_none_exist(){
 
 remove_node_gap(){
 	# 虽然web上已经可以自动化无缝重排序了，但是考虑到有的用户设置了插件自动化，长期不进入web，而后台更新节点持续一段时间后，节点顺序还是会很乱，所以保留此功能
-	SEQ=$(export -p | grep "ssconf_basic" | grep _name_ | cut -d "_" -f 4 | cut -d "=" -f 1 | sort -n)
-	MAX=$(export -p | grep "ssconf_basic" | grep _name_ | cut -d "_" -f 4 | cut -d "=" -f 1 | sort -rn | head -n1)
+	SEQ=$(dbus list ssconf_basic_name_ | cut -d "_" -f 4 | cut -d "=" -f 1 | sort -n)
+	MAX=$(dbus list ssconf_basic_name_ | cut -d "_" -f 4 | cut -d "=" -f 1 | sort -rn | head -n1)
 	NODES_NU=$(export -p | grep "ssconf_basic" | grep _name_ | wc -l)
 	
 	echo_date "最大节点序号：$MAX"

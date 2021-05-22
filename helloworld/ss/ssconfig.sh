@@ -31,7 +31,9 @@ KVER=$(uname -r)
 #else
 	FASTOPEN=0
 #fi
-
+if [ "$(dbus get softcenter_arch)" == "armv7l" ];then
+THREAD=1
+fi
 #-----------------------------------------------
 
 cmd() {
@@ -299,6 +301,10 @@ kill_process() {
 	if [ -n "$trojan_process" ];then 
 		echo_date 关闭trojan进程...
 		killall trojan >/dev/null 2>&1
+	fi
+	obfs-local_process=$(pidof obfs-local)
+	if [ -n "$obfs-local_process" ];then 
+		killall obfs-local >/dev/null 2>&1
 	fi
 	redsocks2_process=$(pidof redsocks2)
 	if [ -n "$redsocks2_process" ];then 
@@ -1636,7 +1642,7 @@ restart_dnsmasq(){
 write_numbers(){
 	nvram set update_ipset="$(cat /jffs/softcenter/ss/rules/version | sed -n 1p | sed 's/#/\n/g'| sed -n 1p)"
 	nvram set update_chnroute="$(cat /jffs/softcenter/ss/rules/version | sed -n 2p | sed 's/#/\n/g'| sed -n 1p)"
-	nvram set update_cdn="$(cat /jffs/softcenter/ss/rules/version | sed -n 4p | sed 's/#/\n/g'| sed -n 1p)"
+	nvram set update_cdn="$(cat /jffs/softcenter/ss/rules/version | sed -n 3p | sed 's/#/\n/g'| sed -n 1p)"
 	nvram set ipset_numbers=$(cat /jffs/softcenter/ss/rules/gfwlist.conf | grep -c ipset)
 	nvram set chnroute_numbers=$(cat /jffs/softcenter/ss/rules/chnroute.txt | grep -c .)
 	nvram set chnroute_ips=$(awk -F "/" '{sum += 2^(32-$2)};END {print sum}' /jffs/softcenter/ss/rules/chnroute.txt)
