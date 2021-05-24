@@ -65,11 +65,11 @@
 
 ### [armng](https://github.com/zusterben/plan_b/tree/master/bin/armng)
 
-> **armng**离线安装包能在带有FPU的armv7架构的机器上使用(包含博通、高通、mtk)！
+> **armng**离线安装包能在带有FPU且内核工作在armv7架构的机器上使用(包含博通(BCM675x)、高通(IPQ4/5/6/80xx)、MTK(MT7622/3/9))！
 
 **armng**支持机型如下：
 
-* 华硕系列：[`RT-AX55` `RT-AX56U` `RT-AX58U` `TUF-AX3000` `RT-AX82U` `RT-ACRH17` `RT-AC2200` `RT-AX89X` `RT-ACRH18` `ZENWIFI-CT8` `ZENWIFI-AC` `ZENWIFI-AX`](https://github.com/zusterben/plan_b/tree/master/bin/armng)
+* 华硕系列：[`RT-AX55` `RT-AX56U` `RT-AX58U` `TUF-AX3000` `TUF-AX5400` `RT-AX82U` `RT-ACRH17` `RT-AC2200` `RT-AX89X` `RT-ACRH18` `ZENWIFI-CT8` `ZENWIFI-XT8` `ZENWIFI-AC` `ZENWIFI-AX` `ET10` `PL-AX56`](https://github.com/zusterben/plan_b/tree/master/bin/armng)
 * 网件系列：[`RAX20` `RAX50` `RAX120`](https://github.com/zusterben/plan_b/tree/master/bin/armng)
 * 天邑系列：[`TY6201`](https://github.com/zusterben/plan_b/tree/master/bin/armng)
 * 小米系列：[`AX3600`](https://github.com/zusterben/plan_b/tree/master/bin/armng)
