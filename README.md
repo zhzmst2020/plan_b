@@ -2,6 +2,8 @@
 
 > 此项目提供用于 **SWRT** 固件带软件中心路由器的helloworld科学上网。
 
+> 本项目为[helloworld](https://github.com/fw876/helloworld)的 **SWRT** 固件实现,部分代码来自[passwall](https://github.com/xiaorouji/openwrt-passwall)
+
 > 安装包在bin目录对应架构下载，可以看下面的列表查找对应架构
 
 > history_package目录为安装包备份

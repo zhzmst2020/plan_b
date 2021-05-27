@@ -21,23 +21,6 @@ if [ "$firmware_comp" == "1" ];then
 	exit 1
 fi
 
-echo_date 检测jffs分区剩余空间...
-if [ "$(nvram get sc_mount)" == 0 ];then
-	SPACE_AVAL=$(df|grep jffs | awk '{print $4}')
-	SPACE_NEED=$(du -s /tmp/helloworld*.tar.gz | awk '{print $1}')
-	if [ "$SPACE_AVAL" -gt "$SPACE_NEED" ];then
-		echo_date 当前jffs分区剩余"$SPACE_AVAL" KB, 插件安装需要"$SPACE_NEED" KB，空间满足，继续安装！
-	elif [ -n "$ss_basic_version_local" ];then
-		echo_date 空间满足，继续安装！
-	else
-		echo_date 当前jffs分区剩余"$SPACE_AVAL" KB, 插件安装需要"$SPACE_NEED" KB，空间不足！
-		echo_date 退出安装！
-		exit 1
-	fi
-else
-	echo_date U盘已挂载，继续安装！
-fi
-
 if [ "${MODEL:0:3}" == "GT-" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
 	ROG=1
 elif [ "${MODEL:0:3}" == "TUF" ] || [ "$(nvram get merlinr_tuf)" == "1" ];then
