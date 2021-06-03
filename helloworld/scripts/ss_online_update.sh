@@ -401,6 +401,7 @@ get_v2ray_remote_config(){
 	v2ray_id=$(echo "$decode_link" | jq -r .id | sed 's/[ \t]*//g')
 	v2ray_aid=$(echo "$decode_link" | jq -r .aid | sed 's/[ \t]*//g')
 	v2ray_net=$(echo "$decode_link" | jq -r .net)
+	v2ray_scy=$(echo "$decode_link" | jq -r .scy)
 	v2ray_type=$(echo "$decode_link" | jq -r .type)
 	v2ray_tls_tmp=$(echo "$decode_link" | jq -r .tls)
 	[ "$v2ray_tls_tmp"x == "tls"x ] && v2ray_tls="tls" || v2ray_tls="none"
@@ -453,6 +454,7 @@ get_v2ray_remote_config(){
 	# echo v2ray_port: $v2ray_port
 	# echo v2ray_id: $v2ray_id
 	# echo v2ray_net: $v2ray_net
+	# echo v2ray_scy: $v2ray_scy
 	# echo v2ray_type: $v2ray_type
 	# echo v2ray_host: $v2ray_host
 	# echo v2ray_path: $v2ray_path
@@ -465,10 +467,11 @@ get_v2ray_remote_config(){
 add_v2ray_servers(){
 	let NODE_INDEX+=1
 	[ -z "$1" ] && dbus set ssconf_basic_group_$NODE_INDEX=$v2ray_group
+	[ -z "$v2ray_scy" ] && v2ray_scy="auto"
 	dbus set ssconf_basic_type_$NODE_INDEX=2
 	dbus set ssconf_basic_v2ray_mux_enable_$NODE_INDEX=0
 	dbus set ssconf_basic_v2ray_use_json_$NODE_INDEX=0
-	dbus set ssconf_basic_v2ray_security_$NODE_INDEX="auto"
+	dbus set ssconf_basic_v2ray_security_$NODE_INDEX=$v2ray_scy
 	dbus set ssconf_basic_mode_$NODE_INDEX=$ssr_subscribe_mode
 	dbus set ssconf_basic_name_$NODE_INDEX=$v2ray_ps
 	dbus set ssconf_basic_port_$NODE_INDEX=$v2ray_port

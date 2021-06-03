@@ -309,7 +309,7 @@ function save() {
 		dbus["ssconf_basic_server_" + node_sel] = vmess_node.add;
 		dbus["ssconf_basic_port_" + node_sel] = vmess_node.port;
 		dbus["ssconf_basic_v2ray_uuid_" + node_sel] = vmess_node.id;
-		dbus["ssconf_basic_v2ray_security_" + node_sel] = "auto";
+		dbus["ssconf_basic_v2ray_security_" + node_sel] = vmess_node.scy || "auto";
 		dbus["ssconf_basic_v2ray_alterid_" + node_sel] = vmess_node.aid;
 		dbus["ssconf_basic_v2ray_protocol_" + node_sel] = "vmess";
 		dbus["ssconf_basic_v2ray_network_" + node_sel] = vmess_node.net;
@@ -964,7 +964,7 @@ function add_ss_node_conf(flag) {
 				ns[p + "_server_" + node_max] = vmess_node.add;
 				ns[p + "_port_" + node_max] = vmess_node.port;
 				ns[p + "_v2ray_uuid_" + node_max] = vmess_node.id;
-				ns[p + "_v2ray_security_" + node_max] = "auto";
+				ns[p + "_v2ray_security_" + node_max] = vmess_node.scy || "auto";
 				ns[p + "_v2ray_alterid_" + node_max] = vmess_node.aid;
 				ns[p + "_v2ray_protocol_" + node_max] = "vmess";
 				ns[p + "_v2ray_network_" + node_max] = vmess_node.net;
@@ -1000,7 +1000,7 @@ function add_ss_node_conf(flag) {
 				}
 			}
 		}
-		ns[p + "_type_" + node_max] = "3";
+		ns[p + "_type_" + node_max] = "2";
 	}
 	//push data to add new node
 	var id = parseInt(Math.random() * 100000000);
@@ -1206,7 +1206,7 @@ function edit_ss_node_conf(flag) {
 				ns["ssconf_basic_server_" + edit_id] = vmess_node.add;
 				ns["ssconf_basic_port_" + edit_id] = vmess_node.port;
 				ns["ssconf_basic_v2ray_uuid_" + edit_id] = vmess_node.id;
-				ns["ssconf_basic_v2ray_security_" + edit_id] = "auto";
+				ns["ssconf_basic_v2ray_security_" + edit_id] = vmess_node.scy || "auto";
 				ns["ssconf_basic_v2ray_alterid_" + edit_id] = vmess_node.aid;
 				ns["ssconf_basic_v2ray_protocol_" + edit_id] = "vmess";
 				ns["ssconf_basic_v2ray_network_" + edit_id] = vmess_node.net;
@@ -1299,7 +1299,7 @@ function generate_node_info() {
 		if (typeof(db_ss["ssconf_basic_ssr_protocol_" + idx]) != "undefined"){
 			obj["type"] = "1";
 		} else {
-			if (typeof(db_ss["ssconf_basic_v2ray_use_json_" + idx]) != "undefined"){
+			if (typeof(db_ss["ssconf_basic_v2ray_protocol_" + idx]) != "undefined"){
 				obj["type"] = "2";
 			}else{
 				if (typeof(db_ss["ssconf_basic_method_" + idx]) != "undefined"){
