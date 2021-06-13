@@ -329,7 +329,7 @@ get_ss_config(){
 			ss_v2ray_tmp="0"
 			ss_v2ray_opts_tmp=""
 			;;
-		kcp)
+		mkcp)
 			
 			;;
 		esac
@@ -417,7 +417,7 @@ get_v2ray_remote_config(){
 			v2ray_host=$(echo "$decode_link" | jq -r .host)
 			v2ray_path=""
 			;;
-		kcp)
+		mkcp)
 			v2ray_host=""
 			v2ray_path=""
 			;;
@@ -488,7 +488,7 @@ add_v2ray_servers(){
 		dbus set ssconf_basic_v2ray_headtype_tcp_$NODE_INDEX=$v2ray_type
 		[ -n "$v2ray_host" ] && dbus set ssconf_basic_v2ray_network_host_$NODE_INDEX=$v2ray_host
 		;;
-	kcp)
+	mkcp)
 		# kcp协议设置【 kcp伪装类型 (type)】
 		dbus set ssconf_basic_v2ray_headtype_kcp_$NODE_INDEX=$v2ray_type
 		;;

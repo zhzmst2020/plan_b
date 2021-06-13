@@ -166,6 +166,9 @@ local function processData(szType, content)
 		result.v2ray_protocol = 'vmess'
 		result.server = info.add
 		result.server_port = info.port
+		if info.net == 'kcp' then
+			info.net = 'mkcp'
+		end
 		result.transport = info.net
 		result.alter_id = info.aid
 		result.vmess_id = info.id
@@ -188,7 +191,7 @@ local function processData(szType, content)
 			result.http_host = info.host and info.host or ""
 			result.http_path = info.path and info.path or ""
 		end
-		if info.net == 'kcp' then
+		if info.net == 'mkcp' then
 			result.kcp_guise = info.type
 			result.mtu = 1350
 			result.tti = 50
@@ -348,6 +351,9 @@ local function processData(szType, content)
 			result.server_port = query[1]
 			result.vmess_id = uuid
 			result.vless_encryption = params.encryption or "none"
+			if params.type == 'kcp' then
+				params.type = 'mkcp'
+			end
 			result.transport = params.type and (params.type == 'http' and 'h2' or params.type) or "tcp"
 			if not params.type or params.type == "tcp" then
 				if params.security == "xtls" then
@@ -366,7 +372,7 @@ local function processData(szType, content)
 				result.h2_host = params.host or host[1]
 				result.h2_path = params.path or "/"
 			end
-			if params.type == 'kcp' then
+			if params.type == 'mkcp' then
 				result.kcp_guise = params.headerType or "none"
 				result.mtu = 1350
 				result.tti = 50
@@ -542,7 +548,7 @@ end
 										elseif result.transport == "tcp" then
 											os.execute("dbus set ssconf_basic_v2ray_network_host_" .. ssrindex .. "='".. result.http_host .. "'")
 											os.execute("dbus set ssconf_basic_v2ray_headtype_tcp_" .. ssrindex .. "='".. result.tcp_guise .. "'")
-										elseif result.transport == "kcp" then
+										elseif result.transport == "mkcp" then
 											os.execute("dbus set ssconf_basic_v2ray_headtype_kcp_" .. ssrindex .. "='".. result.kcp_guise .. "'")
 										elseif result.transport == "quic" then
 											os.execute("dbus set ssconf_basic_v2ray_quic_guise_" .. ssrindex .. "='".. result.quic_guise .. "'")
@@ -568,7 +574,7 @@ end
 										elseif result.transport == "tcp" then
 											os.execute("dbus set ssconf_basic_v2ray_network_host_" .. ssrindex .. "='".. result.http_host .. "'")
 											os.execute("dbus set ssconf_basic_v2ray_headtype_tcp_" .. ssrindex .. "='".. result.tcp_guise .. "'")
-										elseif result.transport == "kcp" then
+										elseif result.transport == "mkcp" then
 											os.execute("dbus set ssconf_basic_v2ray_headtype_kcp_" .. ssrindex .. "='".. result.kcp_guise .. "'")
 										elseif result.transport == "quic" then
 											os.execute("dbus set ssconf_basic_v2ray_quic_guise_" .. ssrindex .. "='".. result.quic_guise .. "'")

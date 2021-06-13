@@ -315,7 +315,7 @@ function save() {
 		dbus["ssconf_basic_v2ray_network_" + node_sel] = vmess_node.net;
 		if(vmess_node.net == "tcp"){
 			dbus["ssconf_basic_v2ray_headtype_tcp_" + node_sel] = vmess_node.type;
-		}else if(vmess_node.net == "kcp"){
+		}else if(vmess_node.net == "mkcp"){
 			dbus["ssconf_basic_v2ray_headtype_kcp_" + node_sel] = vmess_node.type;
 		}
 		dbus["ssconf_basic_v2ray_network_host_" + node_sel] = vmess_node.host;
@@ -454,7 +454,7 @@ function verifyFields(r) {
 	var json_off = E("ss_basic_v2ray_use_json").checked == false;
 	var http_on = E("ss_basic_v2ray_network").value == "tcp" && E("ss_basic_v2ray_headtype_tcp").value == "http";
 	var tcp_on = E("ss_basic_v2ray_network").value == "tcp" && json_off;
-	var kcp_on = E("ss_basic_v2ray_network").value == "kcp" && json_off;
+	var kcp_on = E("ss_basic_v2ray_network").value == "mkcp" && json_off;
 	var h2_on = E("ss_basic_v2ray_network").value == "h2" && json_off;
 	var ws_on = E("ss_basic_v2ray_network").value == "ws" && json_off;
 	var quic_on = E("ss_basic_v2ray_network").value == "quic" && json_off;
@@ -554,11 +554,11 @@ function verifyFields(r) {
 			E('v2ray_json_tr').style.display = "none";
 			var http_on_2 = E("ss_node_table_v2ray_network").value == "tcp" && E("ss_node_table_v2ray_headtype_tcp").value == "http";
 			var host_on_2 = E("ss_node_table_v2ray_network").value == "ws" || E("ss_node_table_v2ray_network").value == "h2" || http_on_2;
-			var path_on_2 = E("ss_node_table_v2ray_network").value == "ws" || E("ss_node_table_v2ray_network").value == "h2" || E("ss_node_table_v2ray_network").value == "kcp";
+			var path_on_2 = E("ss_node_table_v2ray_network").value == "ws" || E("ss_node_table_v2ray_network").value == "h2" || E("ss_node_table_v2ray_network").value == "mkcp";
 			var tls_on_2 = E("ss_node_table_v2ray_network_security").value == "tls";
 			var xtls_on_2 = E("ss_node_table_v2ray_network_security").value == "xtls";
 			showhide("v2ray_headtype_tcp_tr", (E("ss_node_table_v2ray_network").value == "tcp"));
-			showhide("v2ray_headtype_kcp_tr", (E("ss_node_table_v2ray_network").value == "kcp"));
+			showhide("v2ray_headtype_kcp_tr", (E("ss_node_table_v2ray_network").value == "mkcp"));
 			showhide("v2ray_network_host_tr", host_on_2);
 			showhide("v2ray_network_path_tr", path_on_2);
 			showhide("v2ray_network_tlshost_tr", (tls_on_2 || xtls_on_2));
@@ -848,11 +848,11 @@ function tabclickhandler(_type) {
 			E('v2ray_json_tr').style.display = "none";
 			var http_on_2 = E("ss_node_table_v2ray_network").value == "tcp" && E("ss_node_table_v2ray_headtype_tcp").value == "http";
 			var host_on_2 = E("ss_node_table_v2ray_network").value == "ws" || E("ss_node_table_v2ray_network").value == "h2" || http_on_2;
-			var path_on_2 = E("ss_node_table_v2ray_network").value == "ws" || E("ss_node_table_v2ray_network").value == "h2" || E("ss_node_table_v2ray_network").value == "kcp";
+			var path_on_2 = E("ss_node_table_v2ray_network").value == "ws" || E("ss_node_table_v2ray_network").value == "h2" || E("ss_node_table_v2ray_network").value == "mkcp";
 			var tlshost_on = E("ss_node_table_v2ray_network_security").value != "none";
 			var xtlshost_on = E("ss_node_table_v2ray_network_security").value == "xtls";
 			showhide("v2ray_headtype_tcp_tr", (E("ss_node_table_v2ray_network").value == "tcp"));
-			showhide("v2ray_headtype_kcp_tr", (E("ss_node_table_v2ray_network").value == "kcp"));
+			showhide("v2ray_headtype_kcp_tr", (E("ss_node_table_v2ray_network").value == "mkcp"));
 			showhide("v2ray_network_host_tr", host_on_2);
 			showhide("v2ray_network_path_tr", path_on_2);
 			showhide("v2ray_network_tlshost_tr", tlshost_on);
@@ -970,7 +970,7 @@ function add_ss_node_conf(flag) {
 				ns[p + "_v2ray_network_" + node_max] = vmess_node.net;
 				if(vmess_node.net == "tcp"){
 					ns[p + "_v2ray_headtype_tcp_" + node_max] = vmess_node.type;
-				}else if(vmess_node.net == "kcp"){
+				}else if(vmess_node.net == "mkcp"){
 					ns[p + "_v2ray_headtype_kcp_" + node_max] = vmess_node.type;
 				}
 				ns[p + "_v2ray_network_host_" + node_max] = vmess_node.host;
@@ -1212,7 +1212,7 @@ function edit_ss_node_conf(flag) {
 				ns["ssconf_basic_v2ray_network_" + edit_id] = vmess_node.net;
 				if(vmess_node.net == "tcp"){
 					ns["ssconf_basic_v2ray_headtype_tcp_" + edit_id] = vmess_node.type;
-				}else if(vmess_node.net == "kcp"){
+				}else if(vmess_node.net == "mkcp"){
 					ns["ssconf_basic_v2ray_headtype_kcp_" + edit_id] = vmess_node.type;
 				}
 				ns["ssconf_basic_v2ray_network_host_" + edit_id] = vmess_node.host;
@@ -3062,7 +3062,7 @@ function save_failover() {
 																	{ title: '额外ID (Alterld)', rid:'v2ray_alterid_tr', id:'ss_node_table_v2ray_alterid', type:'text', maxlen:'300', style:'width:338px', hidden:"yes"},
 																	{ title: '协议protocol（vmess/vless）', rid:'v2ray_protocol_tr', id:'ss_node_table_v2ray_protocol', type:'select', func:'v', options:[["vmess", "vmess"], ["vless", "vless"], ["trojan", "trojan"], ["ss", "ss"], ["socks", "socks"], ["http", "http"]], style:'width:350px', value: "vmess", hidden:"yes"},
 																	{ title: '加密方式 (security)', rid:'v2ray_security_tr', id:'ss_node_table_v2ray_security', type:'select', options:option_v2enc, style:'width:350px', value: "auto", hidden:"yes"},
-																	{ title: '传输协议 (network)', rid:'v2ray_network_tr', id:'ss_node_table_v2ray_network', type:'select', func:'v', options:["tcp", "kcp", "ws", "h2", "quic", "grpc"], style:'width:350px', value: "tcp", hidden:"yes"},
+																	{ title: '传输协议 (network)', rid:'v2ray_network_tr', id:'ss_node_table_v2ray_network', type:'select', func:'v', options:["tcp", "mkcp", "ws", "h2", "quic", "grpc"], style:'width:350px', value: "tcp", hidden:"yes"},
 																	{ title: 'tcp伪装类型 (type)', rid:'v2ray_headtype_tcp_tr', id:'ss_node_table_v2ray_headtype_tcp', type:'select', func:'v', options:option_headtcp, style:'width:350px', value: "none", hidden:"yes"},
 																	{ title: 'kcp伪装类型 (type)', rid:'v2ray_headtype_kcp_tr', id:'ss_node_table_v2ray_headtype_kcp', type:'select', func:'v', options:option_headkcp, style:'width:350px', value: "none", hidden:"yes"},
 																	{ title: '伪装域名 (host)', rid:'v2ray_network_host_tr', id:'ss_node_table_v2ray_network_host', type:'text', maxlen:'300', style:'width:338px', hidden:"yes"},
@@ -3120,7 +3120,7 @@ function save_failover() {
 														{ title: '额外ID (Alterld)', id:'ss_basic_v2ray_alterid', type:'text', hint:'48', maxlen:'50', hidden:"yes"},
 														{ title: '协议protocol（vmess/vless）', id:'ss_basic_v2ray_protocol', type:'select', func:'v', options:[["vmess", "vmess"], ["vless", "vless"], ["trojan", "trojan"], ["ss", "ss"], ["socks", "socks"], ["http", "http"]], value: "vmess", hidden:"yes"},
 														{ title: '加密方式 (security)', id:'ss_basic_v2ray_security', type:'select', hint:'47', options:option_v2enc, hidden:"yes"},
-														{ title: '传输协议 (network)', id:'ss_basic_v2ray_network', type:'select', func:'v', hint:'35', options:["tcp", "kcp", "ws", "h2", "quic", "grpc"], hidden:"yes"},
+														{ title: '传输协议 (network)', id:'ss_basic_v2ray_network', type:'select', func:'v', hint:'35', options:["tcp", "mkcp", "ws", "h2", "quic", "grpc"], hidden:"yes"},
 														{ title: '* tcp伪装类型 (type)', id:'ss_basic_v2ray_headtype_tcp', type:'select', func:'v', hint:'36', options:option_headtcp, hidden:"yes"},
 														{ title: '* kcp伪装类型 (type)', id:'ss_basic_v2ray_headtype_kcp', type:'select', func:'v', hint:'37', options:option_headkcp, hidden:"yes"},
 														{ title: '* 伪装域名 (host)', id:'ss_basic_v2ray_network_host', type:'text', hint:'28', maxlen:'300', ph:'没有请留空', hidden:"yes"},
