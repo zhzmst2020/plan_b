@@ -620,7 +620,7 @@ create_dnsmasq_conf() {
 		echo "#for router itself" >>/tmp/wblist.conf
 		echo "server=/.google.com.tw/127.0.0.1#$DNSF_PORT" >>/tmp/wblist.conf
 		echo "ipset=/.google.com.tw/router" >>/tmp/wblist.conf
-		echo "server=/dns.google.com/127.0.0.1#$DNSF_PORT" >>/tmp/wblist.conf
+		#echo "server=/dns.google.com/127.0.0.1#$DNSF_PORT" >>/tmp/wblist.conf
 		echo "ipset=/dns.google.com/router" >>/tmp/wblist.conf
 		#echo "server=/.github.com/127.0.0.1#$DNSF_PORT" >>/tmp/wblist.conf
 		echo "ipset=/github.com/router" >>/tmp/wblist.conf
