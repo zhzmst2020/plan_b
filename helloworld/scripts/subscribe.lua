@@ -264,6 +264,9 @@ local function processData(szType, content)
 				else
 					result.plugin = plugin_info
 				end
+				if result.plugin == "simple-obfs" then
+					result.plugin = "obfs-local"
+				end
 			end
 		else
 			result.server_port = host[2]
@@ -289,6 +292,9 @@ local function processData(szType, content)
 		result.encrypt_method_ss = content.encryption
 		result.plugin = content.plugin
 		result.plugin_opts = content.plugin_options
+		if result.plugin == "simple-obfs" then
+			result.plugin = "obfs-local"
+		end
 		result.alias = "[" .. content.airport .. "] " .. content.remarks
 	elseif szType == "trojan" then
 		local idx_sp = 0

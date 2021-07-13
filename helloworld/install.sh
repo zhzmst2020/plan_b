@@ -4,10 +4,7 @@ source /jffs/softcenter/scripts/base.sh
 eval $(dbus export ss)
 alias echo_date='echo 【$(TZ=UTC-8 date -R +%Y年%m月%d日\ %X)】:'
 MODEL=$(nvram get productid)
-ODMPID=$(nvram get odmpid)
-if [ -n "${ODMPID}" ];then
-	MODEL="${ODMPID}"
-fi
+
 mkdir -p /jffs/softcenter/ss
 mkdir -p /tmp/upload
 
@@ -21,9 +18,9 @@ if [ "$firmware_comp" == "1" ];then
 	exit 1
 fi
 
-if [ "${MODEL:0:3}" == "GT-" ] || [ "$(nvram get merlinr_rog)" == "1" ];then
+if [ "${MODEL:0:3}" == "GT-" ] || [ "$(nvram get swrt_rog)" == "1" ];then
 	ROG=1
-elif [ "${MODEL:0:3}" == "TUF" ] || [ "$(nvram get merlinr_tuf)" == "1" ];then
+elif [ "${MODEL:0:3}" == "TUF" ] || [ "$(nvram get swrt_tuf)" == "1" ];then
 	TUF=1
 fi
 

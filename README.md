@@ -89,7 +89,7 @@
 
 **mipsel**支持机型：
 
-* 华硕系列：[`RT-AC85U` `RT-AC85P`](https://github.com/zusterben/plan_b/tree/master/bin/mipsel)
+* 华硕系列：[`RT-AC85U` `RT-AC85P` `RT-AX53U`](https://github.com/zusterben/plan_b/tree/master/bin/mipsel)
 * 红米系列：[`RM-AC2100`](https://github.com/zusterben/plan_b/tree/master/bin/mipsel)
 * 网件系列：[`R6800`](https://github.com/zusterben/plan_b/tree/master/bin/mipsel)
 
