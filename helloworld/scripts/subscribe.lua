@@ -284,6 +284,16 @@ local function processData(szType, content)
 			result.encrypt_method_ss = method
 			result.password = nixio.bin.b64encode(password)
 		end
+	elseif szType == "sip008" then
+		result.type = "ss"
+		result.server = content.server
+		result.server_port = content.server_port
+		result.password = nixio.bin.b64encode(content.password)
+		result.encrypt_method_ss = content.method
+		result.plugin = content.plugin
+		result.plugin_opts = content.plugin_opts
+		result.alias = content.remarks
+		end
 	elseif szType == "ssd" then
 		result.type = "ss"
 		result.server = content.server
@@ -461,7 +471,7 @@ end
 					szType = 'ssd'
 					local nEnd = select(2, raw:find('ssd://'))
 					nodes = base64Decode(raw:sub(nEnd + 1, #raw))
-					nodes = jsonParse(nodes)
+					nodes = cjson.decode(nodes)
 					local extra = {airport = nodes.airport, port = nodes.port, encryption = nodes.encryption, password = nodes.password}
 					local servers = {}
 					-- SS里面包着 干脆直接这样
@@ -469,6 +479,12 @@ end
 						tinsert(servers, setmetatable(server, {__index = extra}))
 					end
 					nodes = servers
+				-- SS SIP008 直接使用 Json 格式
+				elseif cjson.decode(raw) then
+					nodes = cjson.decode(raw)
+					if nodes[1].server and nodes[1].method then
+						szType = 'sip008'
+					end
 				else
 					-- ssd 外的格式
 					nodes = split(base64Decode(raw):gsub(" ", "_"), "\n")
