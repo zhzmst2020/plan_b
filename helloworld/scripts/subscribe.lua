@@ -293,7 +293,6 @@ local function processData(szType, content)
 		result.plugin = content.plugin
 		result.plugin_opts = content.plugin_opts
 		result.alias = content.remarks
-		end
 	elseif szType == "ssd" then
 		result.type = "ss"
 		result.server = content.server
