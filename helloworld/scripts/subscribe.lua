@@ -269,7 +269,7 @@ local function processData(szType, content)
 				end
 			end
 		else
-			result.server_port = host[2]
+			result.server_port = host[2]:gsub("/","")
 		end
 		if not result.plugin then
 			result.plugin = "none"
@@ -443,7 +443,7 @@ end
 
 local function check_filer(result)
 	do
-		local filter_word = split(filter_words, "/")
+		local filter_word = split(filter_words, ",")
 		for i, v in pairs(filter_word) do
 			if result.alias:find(v) then
 				log('订阅节点关键字过滤:“' .. v ..'” ，该节点被丢弃')
